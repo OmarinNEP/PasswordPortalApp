@@ -1,0 +1,31 @@
+﻿@page
+@model RequestResetModel
+@{
+    ViewData["Title"] = "Request Password Reset";
+}
+
+<div class="text-center mt-5">
+    <h2>Password Reset Request</h2>
+
+    @if (Model.SuccessMessage != null)
+    {
+        <div class="alert alert-success">@Model.SuccessMessage</div>
+    }
+    else if (Model.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@Model.ErrorMessage</div>
+    }
+
+    <form method="post">
+        <div class="form-group">
+            <label for="email">Email or Username</label>
+            <input asp-for="UserIdentifier" class="form-control" id="email" placeholder="Enter your email or username" />
+            <span asp-validation-for="UserIdentifier" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Request Reset</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

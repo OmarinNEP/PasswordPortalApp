@@ -1,10 +1,56 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Password Reset";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome FRIEND DOG!</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5" style="max-width: 480px;">
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h3 class="text-center mb-3">Password Reset</h3>
+
+            <p class="text-muted text-center">
+                Enter your corporate email address or username.
+                <br />
+                If an account is found, you will receive a reset link.
+            </p>
+
+            <form method="post">
+                <div class="mb-3">
+                    <label asp-for="UserIdentifier" class="form-label">
+                        Email or Username
+                    </label>
+                    <input asp-for="UserIdentifier"
+                           class="form-control"
+                           placeholder="user@company.com or username"
+                           autocomplete="username"
+                           required />
+                    <span asp-validation-for="UserIdentifier" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">
+                        Send Reset Link
+                    </button>
+                </div>
+            </form>
+
+            @if (Model.ShowConfirmation)
+            {
+                <div class="alert alert-success mt-4" role="alert">
+                    If the account exists, a password reset email has been sent.
+                </div>
+            }
+
+        </div>
+    </div>
+
+    <p class="text-center text-muted mt-3" style="font-size: 0.9rem;">
+        Need help? Contact IT Support.
+    </p>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
